@@ -8,28 +8,29 @@ class Product {
     this.imageUrl = imageUrl;
   }
 
-  save() {}
-
-  static deleteById(id) {
-    // getProductsFromFile(products => {
-    //   const product = products.find(prod => prod.id === id);
-    //   const updatedProducts = products.filter(prod => prod.id !== id);
-    //   fs.writeFile(p, JSON.stringify(updatedProducts), err => {
-    //     if (!err) {
-    //       Cart.deleteProduct(id, product.price);
-    //     }
-    //   });
-    // });
+  save() {
+    const db = getDb();
+    return db
+      .collection('products')
+      .insertOne(this)
+      .then(result => console.log(result))
+      .catch(err => console.log(err));
   }
 
-  static fetchAll(cb) {
-    // getProductsFromFile(cb);
-  }
-
-  static findById(id, cb) {
-    // getProductsFromFile(products => {
-    //   const product = products.find(p => p.id === id);
-    //   cb(product);
-    // });
+  static fetchAll() {
+    const db = getDb();
+    return db
+      .collection('products')
+      .find()
+      .toArray()
+      .then(products => {
+        console.log('product.js', products);
+        return products;
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 }
+
+module.exports = Product;

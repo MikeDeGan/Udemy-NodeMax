@@ -17,6 +17,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
   // find user by id
+  next();
 });
 
 app.use('/admin', adminRoutes);
