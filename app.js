@@ -11,13 +11,21 @@ app.set('views', 'views');
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 const errorController = require('./controllers/error');
+const User = require('./models/user');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
-  // find user by id
-  next();
+  User.findById('5c8d6ba81c9d44000030ec4c')
+    .then(user => {
+      req.user = user;
+      next();
+    })
+    .catch(err => console.log(err));
+
+  // req.userId = '5c8d6ba81c9d44000030ec4c';
+  // next();
 });
 
 app.use('/admin', adminRoutes);
