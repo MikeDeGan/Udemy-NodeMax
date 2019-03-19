@@ -23,9 +23,6 @@ app.use((req, res, next) => {
       next();
     })
     .catch(err => console.log(err));
-
-  // req.userId = '5c8d6ba81c9d44000030ec4c';
-  // next();
 });
 
 app.use('/admin', adminRoutes);
