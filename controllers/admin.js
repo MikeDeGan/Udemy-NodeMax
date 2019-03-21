@@ -22,7 +22,7 @@ exports.postAddProduct = (req, res, next) => {
     description,
     imageUrl,
     null,
-    req.user._id
+    req.user._id // will come in as a string
   );
   product
     .save()
